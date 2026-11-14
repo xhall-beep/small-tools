@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xhall-beep.github.io/small-tools/sitemap.xml
