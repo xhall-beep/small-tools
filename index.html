@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Small Tools — software that fixes one expensive problem</title>
+<meta name="description" content="Two small, dependency-free tools: a validated guitar pedal spec catalog, and a runit supervisor that explains why your service will not start. Free editions included.">
+<meta property="og:title" content="Small Tools">
+<meta property="og:description" content="Software that fixes one expensive problem, with tests you can run yourself.">
+<meta property="og:image" content="assets/svcguard-cover.png">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Pure Python standard library · no accounts · no telemetry</p>
+    <h1>Software that fixes<br><em>one expensive problem.</em></h1>
+    <p class="lede">
+      Two small tools, each built around a failure that actually costs money:
+      a pedal spec sheet that ships missing its polarity, and a service that
+      will not restart because a dead supervisor left a lock behind.
+    </p>
+    <p class="lede dim">
+      Every claim on this page is backed by an automated test suite you can run
+      yourself before you pay anything.
+    </p>
+    <div class="cta-row">
+      <a class="btn primary" href="#free">Download the free editions</a>
+      <a class="btn" href="#products">See the full versions</a>
+    </div>
+  </div>
+</header>
+
+<section class="stats">
+  <div class="wrap stats-row">
+    <div><strong>38</strong><span>automated tests</span></div>
+    <div><strong>0</strong><span>runtime dependencies</span></div>
+    <div><strong>2</strong><span>products, both verified</span></div>
+    <div><strong>$0</strong><span>to try</span></div>
+  </div>
+</section>
+
+<main>
+
+<section id="products" class="wrap">
+  <h2>Full editions</h2>
+
+  <article class="product">
+    <div class="product-media">
+      <img src="assets/svcguard-cover.png" alt="svcguard — runit supervision diagnosis" width="1200" height="630" loading="lazy">
+    </div>
+    <div class="product-body">
+      <div class="product-head">
+        <h3>svcguard</h3>
+        <p class="price"><span class="was">$15</span> <span class="now">$9</span></p>
+      </div>
+      <p class="pitch">A supervisor that tells you <em>why</em> your service will not start.</p>
+      <p>
+        When <code>runsv</code> dies badly it leaves <code>supervise/lock</code> behind,
+        and every restart after that fails with <code>unable to open supervise/ok</code> —
+        a message that explains nothing. Meanwhile the dead service's children are
+        reparented to PID&nbsp;1 and quietly burn CPU.
+      </p>
+      <ul class="feat">
+        <li>Detects stale locks, dead supervise pids, missing or non-executable run scripts, and orphans</li>
+        <li><code>ensure</code> starts supervisors; <code>reap</code> terminates orphans</li>
+        <li>Dry-run by default — refuses to touch a lock a live supervisor owns</li>
+        <li><code>--json</code> output for cron and monitoring</li>
+        <li>18 tests, including the false-positive case</li>
+      </ul>
+      <div class="buy" data-product="svcguard" data-label="Buy svcguard — $9"></div>
+    </div>
+  </article>
+
+  <article class="product">
+    <div class="product-media">
+      <img src="assets/pedalspec-cover.png" alt="PedalSpec Studio — validated pedal spec catalog" width="1200" height="630" loading="lazy">
+    </div>
+    <div class="product-body">
+      <div class="product-head">
+        <h3>PedalSpec Studio</h3>
+        <p class="price"><span class="was">$29</span> <span class="now">$19</span></p>
+      </div>
+      <p class="pitch">A pedal catalog that refuses to save an incomplete spec.</p>
+      <p>
+        Most pedal databases are lists. This is a validator with a database
+        attached: ten required fields, range checks on every number, and a
+        completeness score on every record — so a spec sheet cannot quietly
+        ship missing polarity, dimensions, or current draw.
+      </p>
+      <ul class="feat">
+        <li>Schema validation with 0–100 completeness scoring</li>
+        <li>Side-by-side comparison on power, size, weight, bypass, I/O</li>
+        <li>CSV and Markdown export; print-ready one-page spec sheet per pedal</li>
+        <li>Local SQLite file, binds <code>127.0.0.1</code>, no account</li>
+        <li>20 tests against a live HTTP server</li>
+      </ul>
+      <div class="buy" data-product="pedalspec" data-label="Buy PedalSpec Studio — $19"></div>
+    </div>
+  </article>
+
+  <p class="bundle-note">
+    Both together: <strong>$25</strong> — <span class="buy-inline" data-product="bundle" data-label="Get the bundle"></span>
+  </p>
+</section>
+
+<section id="free" class="alt">
+  <div class="wrap">
+    <h2>Free editions</h2>
+    <p class="section-lede">Genuinely useful, not crippled demos. No email, no signup, no tracking.</p>
+
+    <div class="free-grid">
+      <article class="free-card">
+        <h3>svcguard lite</h3>
+        <p>
+          The diagnosis half, free forever. Point it at a runit service tree and it
+          names every broken service in one command. The paid edition adds the
+          repair commands.
+        </p>
+        <pre><code>python3 svcguard-lite.py doctor
+python3 svcguard-lite.py doctor --json</code></pre>
+        <p class="download"><a class="btn" href="free/svcguard-lite.py" download>Download .py</a></p>
+        <p class="meta">Single file · Python 3.8+ · MIT</p>
+      </article>
+
+      <article class="free-card">
+        <h3>PedalSpec v1 schema</h3>
+        <p>
+          The JSON Schema behind the app, plus the rules that make it strict:
+          current draw in mA not µA, polarity required, dimensions without the knobs.
+          Use it in your own tooling, spreadsheet import, or CI check.
+        </p>
+        <pre><code>{
+  "required": ["id", "name", "brand", "category",
+               "yearReleased", "electrical", "physical",
+               "controls", "connections", "source"]
+}</code></pre>
+        <p class="download"><a class="btn" href="free/pedalspec.schema.json" download>Download schema</a></p>
+        <p class="meta">JSON Schema 2020-12 · CC0</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="trust">
+  <h2>Why you can trust this</h2>
+  <div class="trust-grid">
+    <div>
+      <h4>Tests you can run before paying</h4>
+      <p>Every archive ships its suite. Extract it, run <code>python3 -m unittest discover -s tests</code>, and read the output yourself.</p>
+    </div>
+    <div>
+      <h4>Buyer simulation, not a demo</h4>
+      <p>Each release is verified by extracting the archive into a clean directory, running the tests there, and starting the server on a fresh port.</p>
+    </div>
+    <div>
+      <h4>No dependencies</h4>
+      <p>Standard library only. No pip install, no virtualenv, no build step, no supply chain to audit.</p>
+    </div>
+    <div>
+      <h4>Nothing phones home</h4>
+      <p>No telemetry, no licence check, no network calls. The pedal app binds to localhost; svcguard only reads your process table.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap narrow">
+    <h2>Questions</h2>
+
+    <details>
+      <summary>What do I actually receive?</summary>
+      <p>A zip archive containing the full source, tests, README, changelog, installer, and a commercial single-user licence. You own the copy; you may sell the output you produce with it.</p>
+    </details>
+
+    <details>
+      <summary>Do I need Python?</summary>
+      <p>Python 3.9 or newer. It is preinstalled on macOS and most Linux systems. On Windows, use the installer from python.org. Nothing else is required.</p>
+    </details>
+
+    <details>
+      <summary>Will this run on my machine?</summary>
+      <p>It was built and verified on Android/Termux with Python 3.14, which is a stricter environment than a desktop. macOS, Linux, and Windows all work. PedalSpec needs a browser for its interface.</p>
+    </details>
+
+    <details>
+      <summary>Is my data uploaded anywhere?</summary>
+      <p>No. PedalSpec stores everything in a SQLite file next to the app. svcguard reads the process table and your service directory. Neither makes a network request.</p>
+    </details>
+
+    <details>
+      <summary>Refunds?</summary>
+      <p>14 days, no questions. If the tool does not do what this page says, reply to your receipt and you get your money back.</p>
+    </details>
+
+    <details>
+      <summary>Can I use it at work?</summary>
+      <p>Yes, for your own work and on systems you administer. Redistributing or reselling the source is not permitted. Team licences are available.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Built and tested on Android, without a cloud account.</p>
+    <p class="dim">© 2026 · <a href="https://github.com/xhall-beep">GitHub</a></p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  var S = window.STORE || {};
+  document.querySelectorAll('.buy, .buy-inline').forEach(function (node) {
+    var key = node.dataset.product;
+    var url = S[key];
+    var a = document.createElement('a');
+    a.className = 'btn primary' + (node.classList.contains('buy-inline') ? ' small' : '');
+    a.textContent = node.dataset.label;
+    if (url) {
+      a.href = url;
+      a.rel = 'noopener';
+    } else {
+      a.href = S.contact || 'https://github.com/xhall-beep';
+      a.textContent = 'Contact to buy';
+      a.title = 'Checkout link not configured yet';
+    }
+    node.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>

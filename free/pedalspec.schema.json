@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/pedalspec.schema.json",
+  "title": "PedalSpec v1",
+  "description": "A guitar pedal specification record. Every field a buyer or builder needs before committing to a purchase, a board layout, or a power supply.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "brand", "category", "yearReleased", "electrical", "physical", "controls", "connections", "source"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "Lowercase slug, unique per pedal."
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "brand": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": ["overdrive", "distortion", "fuzz", "delay", "reverb", "modulation", "filter", "pitch", "compressor", "eq", "boost", "multi-fx", "utility", "looper"]
+    },
+    "yearReleased": { "type": "integer", "minimum": 1950, "maximum": 2100 },
+    "electrical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["voltageVDC", "currentDrawMA", "polarity", "bypass"],
+      "properties": {
+        "voltageVDC": { "type": "number", "minimum": 1, "maximum": 48 },
+        "currentDrawMA": { "type": "number", "minimum": 0, "maximum": 5000 },
+        "polarity": { "type": "string", "enum": ["center-negative", "center-positive"] },
+        "bypass": { "type": "string", "enum": ["true-bypass", "buffered", "relay", "digital"] }
+      }
+    },
+    "physical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["widthMM", "heightMM", "depthMM", "weightG", "enclosure"],
+      "properties": {
+        "widthMM": { "type": "number", "minimum": 20, "maximum": 900 },
+        "heightMM": { "type": "number", "minimum": 20, "maximum": 900 },
+        "depthMM": { "type": "number", "minimum": 20, "maximum": 900 },
+        "weightG": { "type": "number", "minimum": 50, "maximum": 15000 },
+        "enclosure": { "type": "string", "enum": ["compact", "mini", "medium", "large", "rack", "custom"] }
+      }
+    },
+    "controls": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 24,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "connections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "output"],
+      "properties": {
+        "input": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "output": { "type": "integer", "minimum": 0, "maximum": 8 },
+        "expression": { "type": "boolean" },
+        "midi": { "type": "boolean" }
+      }
+    },
+    "source": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Where the numbers came from: manual URL, box photo, or measurement note."
+    },
+    "verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "True only after checking against manufacturer documentation."
+    },
+    "notes": { "type": "string" }
+  }
+}
