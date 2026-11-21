@@ -8,8 +8,9 @@
  *   pedalspec: "https://yourname.gumroad.com/l/pedalspec",
  */
 window.STORE = {
-  pedalspec: "",
-  svcguard:  "",
-  bundle:    "",
-  contact:   "https://github.com/xhall-beep"
+  pedalspec:   "",
+  svcguard:    "",
+  promptforge: "",
+  bundle:      "",
+  contact:     "https://github.com/xhall-beep"
 };

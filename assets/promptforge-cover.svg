@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="PromptForge — build and lint structured LLM prompts">
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#f0883e"/>
+  <text x="80" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="92" font-weight="700" fill="#f0f6fc">PromptForge</text>
+  <text x="80" y="306" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="34" fill="#8b949e">Build and lint structured LLM prompts</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="25">
+    <text x="80" y="418" fill="#58a6ff">$ promptforge new code-review --var code=@app.py</text>
+    <text x="80" y="462" fill="#3fb950">score 100/100 (A)   0 findings</text>
+  </g>
+  <text x="80" y="556" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="22" fill="#8b949e">Offline · deterministic · 8 templates · 11 rules</text>
+</svg>
